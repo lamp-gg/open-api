@@ -1,0 +1,14 @@
+{
+  "name": "open-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lamp-gg/open-api.git",
+  "author": "merong <merong0704@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "gh-pages": "^3.0.0"
+  }
+}
