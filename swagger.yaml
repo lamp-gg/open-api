@@ -1,0 +1,92 @@
+swagger: '2.0'
+info:
+  version: '0.0.0'
+  title: 'lamp.gg Open API'
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'api.lamp.gg'
+basePath: '/api/v0'
+tags:
+  - name: 'emoji'
+schemes:
+  - 'https'
+paths:
+  /emojis:
+    get:
+      tags:
+        - 'emoji'
+      summary: '유저의 이모지 목록을 가져옵니다'
+      operationId: 'getEmojis'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'twitch_id'
+          in: 'query'
+          description: '트위치 id'
+          required: true
+          type: 'integer'
+        - name: 'format'
+          in: 'query'
+          description: '받을 데이터의 포멧'
+          required: true
+          type: 'string'
+          enum: [odf]
+        - name: 'compat'
+          in: 'query'
+          description: '받을 이모지의 호환성 (gif, webp, mp4)'
+          required: true
+          type: 'string'
+          enum: [fallback]
+
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Odf'
+        '400':
+          description: '올바르지 않은 파라미터'
+        '404':
+          description: '트위치 id에 해당하는 유저가 없음'
+
+    head:
+      tags:
+        - 'emoji'
+      summary: '이모지 제공여부를 확인합니다'
+      operationId: 'headEmojis'
+      parameters:
+        - name: 'twitch_id'
+          in: 'query'
+          description: '트위치 id'
+          required: true
+          type: 'integer'
+      responses:
+        '200':
+          description: 'OK'
+        '400':
+          description: '올바르지 않은 파라미터'
+        '404':
+          description: '트위치 id에 해당하는 유저가 없음'
+
+definitions:
+  Odf:
+    type: object
+    properties:
+      dccons:
+        type: 'array'
+        description: The user ID.
+        items:
+          $ref: '#/definitions/Dccon'
+  Dccon:
+    type: object
+    properties:
+      keywords:
+        type: 'array'
+        items:
+          type: 'string'
+      tags:
+        type: 'array'
+        items:
+          type: 'string'
+      path:
+        type: 'string'
