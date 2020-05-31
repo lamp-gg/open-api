@@ -49,25 +49,6 @@ paths:
         '404':
           description: '트위치 id에 해당하는 유저가 없음'
 
-    head:
-      tags:
-        - 'emoji'
-      summary: '이모지 제공여부를 확인합니다'
-      operationId: 'headEmojis'
-      parameters:
-        - name: 'twitch_id'
-          in: 'query'
-          description: '트위치 id'
-          required: true
-          type: 'integer'
-      responses:
-        '200':
-          description: 'OK'
-        '400':
-          description: '올바르지 않은 파라미터'
-        '404':
-          description: '트위치 id에 해당하는 유저가 없음'
-
 definitions:
   Odf:
     type: object
